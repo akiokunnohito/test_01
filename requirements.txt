@@ -1,0 +1,9 @@
+streamlit
+google-cloud-storage
+numpy
+torch
+torchvision
+opencv-python-headless
+matplotlib
+Pillow
+git+https://github.com/facebookresearch/segment-anything.git
