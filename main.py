@@ -22,33 +22,31 @@ credentials = Credentials.from_service_account_info(service_account_info)
 # クレデンシャルを指定してstorage.Clientを作成
 storage_client = storage.Client(credentials=credentials)
 
-
-# GCSからモデルファイルをダウンロードするため、サービスアカウントキーを使用
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = st.secrets["gcp"]["service_account_key"]
-
-
 # マスク生成の準備
 sys.path.append("..")
 
 # Google Cloud Storageからモデルファイルをダウンロードする関数
-def download_model_from_gcs(bucket_name, model_path, destination_file_name):
-    storage_client = storage.Client()
+def download_model_from_gcs(storage_client, bucket_name, model_path, destination_file_name):
+    # (この行は削除します)
+    # storage_client = storage.Client()
     bucket = storage_client.bucket(bucket_name)
     blob = bucket.blob(model_path)
     blob.download_to_filename(destination_file_name)
     print("Model downloaded from Google Cloud Storage.")
+    
 
 # Google Cloud Storageから画像処理モデルをダウンロード
 bucket_name = "kika_app"
 model_path = "sam_vit_b_01ec64.pth"
 local_model_path = "sam_vit_b_01ec64.pth"
-download_model_from_gcs(bucket_name, model_path, local_model_path)
+download_model_from_gcs(storage_client, bucket_name, model_path, local_model_path)
 
 model_type = "vit_b"
 device = "cpu"
 
 sam = sam_model_registry[model_type](checkpoint=local_model_path)
 sam.to(device=device)
+
 
 
 # マスクを塗分ける関数
