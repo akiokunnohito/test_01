@@ -9,6 +9,18 @@ import matplotlib.pyplot as plt
 import time
 import os
 from google.cloud import storage
+import google.auth
+import json
+from google.oauth2.service_account import Credentials
+
+# JSON形式の認証情報を環境変数から取得
+service_account_info = json.loads(os.environ['GCP_SERVICE_ACCOUNT_KEY'])
+
+# 認証情報を使ってクレデンシャルを作成
+credentials = Credentials.from_service_account_info(service_account_info)
+
+# クレデンシャルを指定してstorage.Clientを作成
+storage_client = storage.Client(credentials=credentials)
 
 
 # GCSからモデルファイルをダウンロードするため、サービスアカウントキーを使用
