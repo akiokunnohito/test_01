@@ -7,7 +7,13 @@ from PIL import Image
 from segment_anything import sam_model_registry, SamAutomaticMaskGenerator
 import matplotlib.pyplot as plt
 import time
+import os
 from google.cloud import storage
+
+
+# GCSからモデルファイルをダウンロードするため、サービスアカウントキーを使用
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = st.secrets["gcp"]["service_account_key"]
+
 
 # マスク生成の準備
 sys.path.append("..")
