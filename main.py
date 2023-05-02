@@ -14,7 +14,7 @@ import json
 from google.oauth2.service_account import Credentials
 
 # JSON形式の認証情報を環境変数から取得
-service_account_info = json.loads(os.environ['GCP_SERVICE_ACCOUNT_KEY'])
+service_account_info = json.loads(st.secrets["gcp"]["service_account_key"])
 
 # 認証情報を使ってクレデンシャルを作成
 credentials = Credentials.from_service_account_info(service_account_info)
