@@ -1,4 +1,4 @@
-git+https://github.com/protocolbuffers/protobuf-python.git@v3.19.5#egg=protobuf
+protobuf==3.19.5
 streamlit==1.21.0
 google-cloud-storage
 numpy
