@@ -87,7 +87,7 @@ uploaded_file = st.file_uploader("画像ファイルをアップロードして�
 
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
-    image = image.resize((256, 256), Image.ANTIALIAS)
+    image = image.resize((256, 256), Image.LANCZOS)
     image_np = np.array(image)
 
     # マスク生成器のインスタンス化と実行

@@ -7,3 +7,4 @@ opencv-python-headless
 matplotlib
 Pillow
 git+https://github.com/facebookresearch/segment-anything.git
+protobuf>=3.19.5,!=3.20.0,!=3.20.1,!=4.21.0,!=4.21.1,!=4.21.2,!=4.21.3,!=4.21.4,!=4.21.5,<5.0.0dev
