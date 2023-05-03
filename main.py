@@ -14,7 +14,7 @@ import json
 from google.oauth2.service_account import Credentials
 
 # JSON形式の認証情報を環境変数から取得
-service_account_info = json.loads(st.secrets["gcp"]["service_account_key"])
+service_account_info = json.loads(st.secrets["gcp"]["service_account_key"], strict=False)
 
 # 認証情報を使ってクレデンシャルを作成
 credentials = Credentials.from_service_account_info(service_account_info)
@@ -33,7 +33,7 @@ def download_model_from_gcs(storage_client, bucket_name, model_path, destination
     blob = bucket.blob(model_path)
     blob.download_to_filename(destination_file_name)
     print("Model downloaded from Google Cloud Storage.")
-    
+
 
 # Google Cloud Storageから画像処理モデルをダウンロード
 bucket_name = "kika_app"
